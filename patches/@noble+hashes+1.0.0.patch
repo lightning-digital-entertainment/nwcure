@@ -1,0 +1,25 @@
+diff --git a/node_modules/@noble/hashes/utils.js b/node_modules/@noble/hashes/utils.js
+index 2ccb60e..06da61a 100644
+--- a/node_modules/@noble/hashes/utils.js
++++ b/node_modules/@noble/hashes/utils.js
+@@ -182,14 +182,11 @@ exports.wrapConstructorWithOpts = wrapConstructorWithOpts;
+  * Secure PRNG
+  */
+ function randomBytes(bytesLength = 32) {
+-    if (crypto_1.crypto.web) {
+-        return crypto_1.crypto.web.getRandomValues(new Uint8Array(bytesLength));
+-    }
+-    else if (crypto_1.crypto.node) {
+-        return new Uint8Array(crypto_1.crypto.node.randomBytes(bytesLength).buffer);
+-    }
+-    else {
+-        throw new Error("The environment doesn't have randomBytes function");
+-    }
++  try {
++    const randomBytes = require('expo-crypto').getRandomBytes;
++    return randomBytes(bytesLength);
++  } catch(e) {
++    throw new Error('Failed to polyfill expo-crypto')
++  }
+ }
+ exports.randomBytes = randomBytes;
