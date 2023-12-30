@@ -18,7 +18,7 @@ const SourceItem = ({ source }: SourceItemProps) => {
 
   const colors = useColorTheme();
   const navigation = useNavigation();
-  const { deleteSourceFn, addSourceFn } = useSourceManagement();
+  const { deleteSourceFn } = useSourceManagement();
 
   useEffect(() => {
     async function checkForBalance() {
@@ -41,7 +41,10 @@ const SourceItem = ({ source }: SourceItemProps) => {
         gap: 2,
       }}
       onPress={() => {
-        navigation.navigate("Source-Details", { id: source.id });
+        navigation.navigate("Tab-Source", {
+          screen: "Source-Details",
+          params: { source: source },
+        });
       }}
       onLongPress={() => {
         deleteSourceFn(source.id);
@@ -63,7 +66,10 @@ const SourceItem = ({ source }: SourceItemProps) => {
             alignSelf: "flex-start",
           }}
           onPress={() => {
-            navigation.navigate("Source-Invoice", { source: source });
+            navigation.navigate("Tab-Source", {
+              screen: "Source-Invoice",
+              params: { source: source },
+            });
           }}
         >
           <Ionicons name="flash" color="white" />

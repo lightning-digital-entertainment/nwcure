@@ -3,12 +3,19 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import PolyfillCrypto from "react-native-webview-crypto";
 import { SQLiteProvider } from "expo-sqlite/next";
-import MainTabNavigator from "./nav/MainTabNavigator";
+import MainTabNavigator, { TabNavigatorParams } from "./nav/MainTabNavigator";
 import "./utils/database";
 import { db, initDb } from "./utils/database";
 import { useEffect } from "react";
 import { Source, addSource } from "./features/sources/sourceSlice";
 import { Proxy, addProxy } from "./features/connections/proxy/proxySlice";
+import { StatusBar } from "react-native";
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends TabNavigatorParams {}
+  }
+}
 
 function Root() {
   useEffect(() => {
@@ -54,6 +61,7 @@ export default function App() {
   return (
     <SQLiteProvider databaseName="nwcure.db" onInit={initDb}>
       <Provider store={store}>
+        <StatusBar />
         <PolyfillCrypto />
         <Root />
       </Provider>
