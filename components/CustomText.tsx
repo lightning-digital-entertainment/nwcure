@@ -1,8 +1,13 @@
-import { View, Text } from "react-native";
+import { View, Text, TextStyle } from "react-native";
 import React from "react";
 import useColorTheme from "../styles/hooks/useColorTheme";
 
-const CustomText = ({ children, weight }) => {
+type CustomTextProps = {
+  children: React.ReactNode;
+  weight?: TextStyle["fontWeight"];
+};
+
+const CustomText = ({ children, weight }: CustomTextProps) => {
   const colors = useColorTheme();
   return (
     <Text

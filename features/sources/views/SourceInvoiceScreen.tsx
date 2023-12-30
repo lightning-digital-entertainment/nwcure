@@ -7,8 +7,18 @@ import CustomButton from "../../../components/CustomButton";
 import { useAppSelector } from "../../../store/hooks";
 import { requestPayment } from "../../../utils/nwc";
 import CustomText from "../../../components/CustomText";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { SourceStackParams } from "../nav/SourceNavigator";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { TabNavigatorParams } from "../../../nav/MainTabNavigator";
 
-const SourceInvoiceScreen = ({ route }) => {
+type SourceInvoiceScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<SourceStackParams, "Source-Invoice">,
+  BottomTabScreenProps<TabNavigatorParams>
+>;
+
+const SourceInvoiceScreen = ({ route }: SourceInvoiceScreenProps) => {
   const { invoice, source } = route.params || {};
 
   const [invoiceInput, setInvoiceInput] = useState<string>(invoice);
@@ -49,7 +59,7 @@ const SourceInvoiceScreen = ({ route }) => {
           <CustomInput value={invoiceInput} onChangeText={setInvoiceInput} />
           <View>
             <CustomText>Select Source</CustomText>
-            {Object.keys(sources).map((sourceId, i) => {
+            {Object.keys(sources).map((sourceId) => {
               const source = sources[sourceId];
               if (selectedSource && sourceId === selectedSource.id) {
                 return (

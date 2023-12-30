@@ -1,11 +1,21 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import { useAppSelector } from "../../../../store/hooks";
 import { selectSourceIds, selectSources } from "../../../sources/sourceSlice";
 import CustomButton from "../../../../components/CustomButton";
 import CustomScreen from "../../../../components/CustomScreen";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ProxyStackParams } from "../nav/ProxyNavigator";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { TabNavigatorParams } from "../../../../nav/MainTabNavigator";
 
-const SelectSourceScreen = ({ navigation }) => {
+type SelectSourceScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<ProxyStackParams, "Proxy-SelectSource">,
+  BottomTabScreenProps<TabNavigatorParams>
+>;
+
+const SelectSourceScreen = ({ navigation }: SelectSourceScreenProps) => {
   const sources = useAppSelector(selectSources);
   const sourceIds = useAppSelector(selectSourceIds);
   return (

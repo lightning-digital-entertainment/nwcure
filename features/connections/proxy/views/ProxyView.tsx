@@ -3,8 +3,18 @@ import React from "react";
 import CustomScreen from "../../../../components/CustomScreen";
 import CustomButton from "../../../../components/CustomButton";
 import { useAppSelector } from "../../../../store/hooks";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ProxyStackParams } from "../nav/ProxyNavigator";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { TabNavigatorParams } from "../../../../nav/MainTabNavigator";
 
-const ProxyView = ({ navigation }) => {
+type ProxyViewProps = CompositeScreenProps<
+  NativeStackScreenProps<ProxyStackParams, "Proxy-Overview">,
+  BottomTabScreenProps<TabNavigatorParams>
+>;
+
+const ProxyView = ({ navigation }: ProxyViewProps) => {
   const proxyIds = useAppSelector((state) => state.proxy.proxyIds);
   const proxies = useAppSelector((state) => state.proxy.proxies);
   console.log(proxyIds);

@@ -3,11 +3,20 @@ import React from "react";
 import CustomButton from "../../../../components/CustomButton";
 import CustomScreen from "../../../../components/CustomScreen";
 import CustomInput from "../../../../components/CustomInput";
-import { Source } from "../../../sources/sourceSlice";
 import useProxyManagement from "../hooks/useProxyManagement";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ProxyStackParams } from "../nav/ProxyNavigator";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { TabNavigatorParams } from "../../../../nav/MainTabNavigator";
 
-const AddProxyView = ({ navigation, route }) => {
-  const { selectedSource }: { selectedSource: Source } = route.params || {};
+type AddProxyViewProps = CompositeScreenProps<
+  NativeStackScreenProps<ProxyStackParams, "Proxy-Add">,
+  BottomTabScreenProps<TabNavigatorParams>
+>;
+
+const AddProxyView = ({ navigation, route }: AddProxyViewProps) => {
+  const { selectedSource } = route.params || {};
   const { addProxyFn } = useProxyManagement();
   async function submitHandler() {
     if (!selectedSource) {

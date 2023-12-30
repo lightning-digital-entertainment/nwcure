@@ -1,21 +1,24 @@
-import { Text, Button, View, Pressable } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { View } from "react-native";
 import React from "react";
 import CustomScreen from "../../../components/CustomScreen";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import { selectSourceIds, selectSources } from "../sourceSlice";
 import CustomButton from "../../../components/CustomButton";
-import { useSourceManagement } from "../hooks/useSourceManagement";
-import { background, blue } from "../../../styles/colors";
-import useColorTheme from "../../../styles/hooks/useColorTheme";
-import CustomText from "../../../components/CustomText";
 import SourceItem from "../components/SourceItem";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { SourceStackParams } from "../nav/SourceNavigator";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { TabNavigatorParams } from "../../../nav/MainTabNavigator";
 
-const SourcesOverview = ({ navigation }) => {
-  const colors = useColorTheme();
+type SourcesOverviewProps = CompositeScreenProps<
+  NativeStackScreenProps<SourceStackParams, "Source-Overview">,
+  BottomTabScreenProps<TabNavigatorParams>
+>;
+
+const SourcesOverview = ({ navigation }: SourcesOverviewProps) => {
   const sources = useAppSelector(selectSources);
   const sourceIds = useAppSelector(selectSourceIds);
-  const { deleteSourceFn } = useSourceManagement();
   return (
     <CustomScreen>
       <View style={{ gap: 4 }}>

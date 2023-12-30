@@ -31,7 +31,6 @@ export const proxySlice = createSlice({
   initialState,
   reducers: {
     addProxy: (state, action: PayloadAction<Proxy>) => {
-      console.log(action.payload);
       const proxyPk = action.payload.proxyPk;
       if (!state.proxies[proxyPk] && !state.proxyIds.includes(proxyPk)) {
         state.proxies[proxyPk] = action.payload;

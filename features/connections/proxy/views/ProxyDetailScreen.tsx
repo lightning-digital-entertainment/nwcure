@@ -3,16 +3,24 @@ import React, { useState } from "react";
 import QRCode from "react-native-qrcode-svg";
 import { useAppSelector } from "../../../../store/hooks";
 import CustomScreen from "../../../../components/CustomScreen";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ProxyStackParams } from "../nav/ProxyNavigator";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { TabNavigatorParams } from "../../../../nav/MainTabNavigator";
 
-const ProxyDetailScreen = ({ route }) => {
-  const proxyPk = route.params.proxyPk;
+type ProxyDetailScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<ProxyStackParams, "Proxy-Detail">,
+  BottomTabScreenProps<TabNavigatorParams>
+>;
+
+const ProxyDetailScreen = ({ route }: ProxyDetailScreenProps) => {
+  const { proxyPk } = route.params || {};
 
   const [qrWidth, setQrWidth] = useState<number>();
 
   const proxy = useAppSelector((state) => state.proxy.proxies)[proxyPk];
 
-  console.log(proxyPk);
-  console.log(proxy);
   return (
     <CustomScreen>
       <Text>{proxy.name}</Text>

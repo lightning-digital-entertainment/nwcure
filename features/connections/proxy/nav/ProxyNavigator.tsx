@@ -5,8 +5,16 @@ import ProxyView from "../views/ProxyView";
 import AddProxyView from "../views/AddProxyView";
 import SelectSourceScreen from "../views/SelectSourceScreen";
 import ProxyDetailScreen from "../views/ProxyDetailScreen";
+import { Source } from "../../../sources/sourceSlice";
 
-const Stack = createNativeStackNavigator();
+export type ProxyStackParams = {
+  "Proxy-Overview": undefined;
+  "Proxy-Add": { selectedSource?: Source };
+  "Proxy-SelectSource": undefined;
+  "Proxy-Detail": { proxyPk: string };
+};
+
+const Stack = createNativeStackNavigator<ProxyStackParams>();
 
 const ProxyNavigator = () => {
   return (

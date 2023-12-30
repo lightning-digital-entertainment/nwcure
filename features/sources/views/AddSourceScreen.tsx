@@ -5,8 +5,18 @@ import CustomInput from "../../../components/CustomInput";
 import CustomKeyboardView from "../../../components/CustomKeyboardView";
 import CustomButton from "../../../components/CustomButton";
 import { useSourceManagement } from "../hooks/useSourceManagement";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { SourceStackParams } from "../nav/SourceNavigator";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { TabNavigatorParams } from "../../../nav/MainTabNavigator";
 
-const AddSourceScreen = ({ route }) => {
+type AddSourceScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<SourceStackParams, "Source-Add">,
+  BottomTabScreenProps<TabNavigatorParams>
+>;
+
+const AddSourceScreen = ({ route }: AddSourceScreenProps) => {
   const { connectionString: initialCS } = route.params || {};
 
   const [name, setName] = useState("");

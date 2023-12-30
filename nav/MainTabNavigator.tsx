@@ -1,22 +1,26 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import SourcesOverview from "../features/sources/views/SourcesOverview";
-import ConnectionNavigator from "../features/connections/nav/ConnectionNavigator";
-import SourceNavigator from "../features/sources/nav/SourceNavigator";
-import ProxyNavigator from "../features/connections/proxy/nav/ProxyNavigator";
+import SourceNavigator, {
+  SourceStackParams,
+} from "../features/sources/nav/SourceNavigator";
+import ProxyNavigator, {
+  ProxyStackParams,
+} from "../features/connections/proxy/nav/ProxyNavigator";
 import HomeScreen from "../features/home/views/HomeScreen";
 import TabBarIcon from "../components/TabBarIcon";
 import ScannerView from "../features/scanner/ScannerView";
 import TabBarHeaderRight from "../components/TabBarHeaderRight";
 import useColorTheme from "../styles/hooks/useColorTheme";
+import { NavigatorScreenParams } from "@react-navigation/native";
 
-type TabNavigatorProps = {
+export type TabNavigatorParams = {
   "Tab-Home": undefined;
-  "Tab-Connections": undefined;
+  "Tab-Camera": undefined;
+  "Tab-Proxy": NavigatorScreenParams<ProxyStackParams>;
+  "Tab-Source": NavigatorScreenParams<SourceStackParams>;
 };
 
-const Tab = createBottomTabNavigator<TabNavigatorProps>();
+const Tab = createBottomTabNavigator<TabNavigatorParams>();
 
 const MainTabNavigator = () => {
   const colors = useColorTheme();

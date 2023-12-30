@@ -2,14 +2,21 @@ import { Text, View } from "react-native";
 import React, { useState } from "react";
 import QRCode from "react-native-qrcode-svg";
 import CustomScreen from "../../../components/CustomScreen";
-import { useAppSelector } from "../../../store/hooks";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { TabNavigatorParams } from "../../../nav/MainTabNavigator";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { SourceStackParams } from "../nav/SourceNavigator";
 
-const SourceDetailScreen = ({ route }) => {
-  const id = route.params.id;
+type SourceDetailScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<SourceStackParams, "Source-Details">,
+  BottomTabScreenProps<TabNavigatorParams>
+>;
+
+const SourceDetailScreen = ({ route }: SourceDetailScreenProps) => {
+  const { source } = route.params;
 
   const [qrWidth, setQrWidth] = useState<number>();
-
-  const source = useAppSelector((state) => state.source.sources)[id];
 
   return (
     <CustomScreen>

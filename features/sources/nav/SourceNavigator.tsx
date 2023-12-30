@@ -4,8 +4,16 @@ import AddSourceScreen from "../views/AddSourceScreen";
 import SourcesOverview from "../views/SourcesOverview";
 import SourceDetailScreen from "../views/SourceDetailScreen";
 import SourceInvoiceScreen from "../views/SourceInvoiceScreen";
+import { Source } from "../sourceSlice";
 
-const Stack = createNativeStackNavigator();
+export type SourceStackParams = {
+  "Source-Overview": undefined;
+  "Source-Add": { connectionString?: string };
+  "Source-Details": { source: Source };
+  "Source-Invoice": { source?: Source; invoice?: string };
+};
+
+const Stack = createNativeStackNavigator<SourceStackParams>();
 
 const SourceNavigator = () => {
   return (
