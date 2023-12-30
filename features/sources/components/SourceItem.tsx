@@ -36,7 +36,7 @@ const SourceItem = ({ source }: SourceItemProps) => {
     <Pressable
       style={{
         padding: 12,
-        backgroundColor: colors.backgroundTertiary,
+        backgroundColor: colors.backgroundSecondary,
         borderRadius: 6,
         gap: 2,
       }}

@@ -1,10 +1,14 @@
 import { useColorScheme } from "react-native";
-import { darkColors } from "../colors";
+import { darkColors, lightColors } from "../colors";
+import { useEffect, useState } from "react";
 
 const useColorTheme = () => {
   const theme = useColorScheme();
-  const colors = darkColors;
-  return colors;
+  if (theme === "dark") {
+    return darkColors;
+  } else {
+    return lightColors;
+  }
 };
 
 export default useColorTheme;
