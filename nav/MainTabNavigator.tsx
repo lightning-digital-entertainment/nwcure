@@ -66,12 +66,12 @@ const MainTabNavigator = () => {
       <Tab.Screen
         name="Tab-Proxy"
         component={ProxyNavigator}
-        options={{ title: "Proxies" }}
+        options={{ title: "Proxies", headerShown: false }}
       />
       <Tab.Screen
         name="Tab-Source"
         component={SourceNavigator}
-        options={{ title: "Sources" }}
+        options={{ title: "Sources", headerShown: false }}
       />
     </Tab.Navigator>
   );

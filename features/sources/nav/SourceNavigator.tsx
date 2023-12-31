@@ -5,6 +5,7 @@ import SourcesOverview from "../views/SourcesOverview";
 import SourceDetailScreen from "../views/SourceDetailScreen";
 import SourceInvoiceScreen from "../views/SourceInvoiceScreen";
 import { Source } from "../sourceSlice";
+import useColorTheme from "../../../styles/hooks/useColorTheme";
 
 export type SourceStackParams = {
   "Source-Overview": undefined;
@@ -16,12 +17,19 @@ export type SourceStackParams = {
 const Stack = createNativeStackNavigator<SourceStackParams>();
 
 const SourceNavigator = () => {
+  const colors = useColorTheme();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.backgroundSecondary },
+        headerTitleStyle: { color: colors.textPrimary },
+        headerTintColor: colors.textSecondary,
+      }}
+    >
       <Stack.Screen
         name="Source-Overview"
         component={SourcesOverview}
-        options={{ headerShown: false }}
+        options={{ title: "Sources" }}
       />
       <Stack.Screen name="Source-Add" component={AddSourceScreen} />
       <Stack.Screen name="Source-Details" component={SourceDetailScreen} />

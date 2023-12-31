@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import React, { useState } from "react";
 import QRCode from "react-native-qrcode-svg";
 import CustomScreen from "../../../components/CustomScreen";
@@ -7,6 +7,8 @@ import { TabNavigatorParams } from "../../../nav/MainTabNavigator";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { SourceStackParams } from "../nav/SourceNavigator";
+import CustomText from "../../../components/CustomText";
+import CustomButton from "../../../components/CustomButton";
 
 type SourceDetailScreenProps = CompositeScreenProps<
   NativeStackScreenProps<SourceStackParams, "Source-Details">,
@@ -20,24 +22,29 @@ const SourceDetailScreen = ({ route }: SourceDetailScreenProps) => {
 
   return (
     <CustomScreen>
-      <Text>{source.name}</Text>
-      <Text>{source.relay}</Text>
-      <Text>{source.secret}</Text>
-      <Text>{source.walletPubkey}</Text>
-      <View
-        style={{
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onLayout={(e) => {
-          setQrWidth(e.nativeEvent.layout.width);
-        }}
-      >
-        {qrWidth ? (
-          <QRCode value={source.connectionString} size={qrWidth * 0.98} />
-        ) : undefined}
-      </View>
+      <ScrollView contentContainerStyle={{ gap: 8 }}>
+        <CustomText>{source.name}</CustomText>
+        <CustomText>{source.walletPubkey}</CustomText>
+        <View
+          style={{
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onLayout={(e) => {
+            setQrWidth(e.nativeEvent.layout.width);
+          }}
+        >
+          {qrWidth ? (
+            <View
+              style={{ padding: 8, backgroundColor: "white", borderRadius: 10 }}
+            >
+              <QRCode value={source.connectionString} size={qrWidth * 0.9} />
+            </View>
+          ) : undefined}
+        </View>
+        <CustomButton text="Copy URI" />
+      </ScrollView>
     </CustomScreen>
   );
 };
