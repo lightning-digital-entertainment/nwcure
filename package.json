@@ -19,10 +19,12 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@types/react": "~18.2.45",
     "expo": "~50.0.0-preview.7",
+    "expo-camera": "~14.0.1",
     "expo-crypto": "~12.8.0",
     "expo-sqlite": "~13.2.0",
     "expo-status-bar": "~1.11.1",
     "isomorphic-webcrypto": "^2.3.8",
+    "light-bolt11-decoder": "^3.0.0",
     "nostr-tools": "^1.8.2",
     "react": "18.2.0",
     "react-native": "0.73.1",
@@ -37,8 +39,7 @@
     "react-native-webview-crypto": "^0.0.25",
     "react-redux": "^9.0.4",
     "text-encoding": "^0.7.0",
-    "typescript": "^5.3.0",
-    "expo-camera": "~14.0.1"
+    "typescript": "^5.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
